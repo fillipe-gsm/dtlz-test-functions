@@ -13,14 +13,13 @@ function pareto_ranges = dtlz_ideal_nadir(fname, M)
 %		 zstar = [0 0 0 ... 0]
 %		 znad = (1/sqrt(2)) ^ [M-2, M-2, M-3, ..., 3, 2, 1, 0]
 %
-%	 DTLZ7: This is the most trickier.
+%	 DTLZ7: This is the trickiest.
 %	 The ideal is composed of M-1 zeros, and the last component is equal to 
 %		 faux = 2*(M - (M-1)*xaux/2*(1 + sin(3*pi*xaux))), 
 %		 	 wherein xaux = 0.85940, obtained numerically by me
-%	 The Nadir has M-1 components equal to xaux (not faux), and the last one is 
-%	 2*M. So,
+%	 The Nadir has M-1 components equal to 1, and the last one is 2*M. So,
 %		 zstar = [0 0 0 ... 0 faux]
-%		 znad = [xaux xaux xaux ... xaux 2*M]
+%		 znad = [1 1 1 ... 1 2*M]
 %
 %	 Syntax:
 %		 pareto_ranges = dtlz_ideal_nadir(fname, M)
@@ -44,7 +43,7 @@ switch (fname)
 		xaux = 0.85940;
 		faux = 2*(M - (M-1)*xaux/2*(1 + sin(3*pi*xaux)));
 		zstar = [zeros(M-1,1); faux];
-		znad = [xaux(ones(M-1,1)); 2*M];
+		znad = [1(ones(M-1,1)); 2*M];
 	
 	otherwise
 		error('Sorry, what the heck of a function is %s?', fname)

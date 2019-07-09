@@ -1,36 +1,47 @@
-function f = dtlz2(x, M)
 %DTZL2 DTLZ2 multi-objective function
 %   This function represents a hyper-sphere.
 %   Using k = 10, the number of dimensions must be n = (M - 1) + k.
-%   The Pareto optimal solutions are obtained when the last k variables of x
+%   The Pareto-optimal solutions are obtained when the last k variables of x
 %   are equal to 0.5.
 %
 %   Syntax:
-%      f = dtzl2(x, M)
+%      fx = dtzl2(x, M)
 %
 %   Input arguments:
-%      x: a n x mu matrix with mu points and n dimensions
+%      x: a (n x mu) matrix with mu points dimension n
 %      M: a scalar with the number of objectives
 %
 %   Output argument:
-%      f: a m x mu matrix with mu points and their m objectives computed at
-%         the input
+%      fx: a (m x mu) matrix with mu points and their m objectives computed at
+%          the input
+%
+%   Example: Mapping the Pareto-optimal front
+%      For M = 2, x has dimension n = 11, wherein the last k = 10 variables 
+%      should be equal to 0.5 when x is in the Pareto-optimal set. In that case, 
+%      we can fix these last variables e vary the first one from 0 to 1 in order 
+%      to map the front:
+%         
+%         N = 100; %number of points
+%         x1 = linspace(0, 1, N);
+%         x2to11 = repmat(0.5, [10, N]);
+%         x = [x1; x2to11];
+%         fx = dtlz2(x, 2);
+%
+%      Plot these points to verify they are indeed semi-circle:
+%
+%         plot(fx(1,:), fx(2,:), 'o');
+function fx = dtlz2(x, M)
+   k = 10;
+   dtlz_dimension_check(x, M, k);
+   
+   n = (M-1) + k;   
+   xm = x(n-k+1:end,:); %xm contains the last k variables
+   g = sum((xm - 0.5).^2, 1);
 
-k = 10;
-% Error check: the number of dimensions must be M-1+k
-n = (M-1) + k; %this is the default
-if size(x,1) ~= n
-   error(['Using k = 10, it is required that the number of dimensions be'...
-   ' n = (M - 1) + k = %d in this case.'], n)
-end
-
-xm = x(n-k+1:end,:); %xm contains the last k variables
-g = sum((xm - 0.5).^2, 1);
-
-% Computes the functions
-f(1,:) = (1 + g).*prod(cos(pi/2*x(1:M-1,:)),1);
-for ii = 2:M-1
-   f(ii,:) = (1 + g) .* prod(cos(pi/2*x(1:M-ii,:)),1) .* ...
-      sin(pi/2*x(M-ii+1,:));
-end
-f(M,:) = (1 + g).*sin(pi/2*x(1,:));
+   % Computes the functions
+   fx(1,:) = (1 + g).*prod(cos(pi/2*x(1:M-1,:)),1);
+   for ii = 2:M-1
+      fx(ii,:) = (1 + g) .* prod(cos(pi/2*x(1:M-ii,:)),1) .* ...
+         sin(pi/2*x(M-ii+1,:));
+   end
+   fx(M,:) = (1 + g).*sin(pi/2*x(1,:));

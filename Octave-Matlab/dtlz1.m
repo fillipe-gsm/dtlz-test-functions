@@ -1,4 +1,3 @@
-function fx = dtlz1(x, M)
 %DTZL1 DTLZ1 multi-objective function
 %   This function represents a hyper-plane.
 %   Using k = 5, the number of dimensions must be n = (M - 1) + k, with M the
@@ -57,22 +56,19 @@ function fx = dtlz1(x, M)
 %      in this case):
 %
 %         plot(fx(1,:), fx(2,:), 'o');
+function fx = dtlz1(x, M)
+   % Check input dimension
+   k = 5; %as suggested by Deb
+   dtlz_dimension_check(x, M, k);
 
-k = 5; %as suggested by Deb
-% Error check: the number of dimensions must be M-1+k
-n = (M-1) + k;
-if size(x,1) ~= n
-   error(['Using k = 5, we require the dimension size to be '...
-   'n = (M - 1) + k = %d in this case.'], n)
-end
+   n = (M-1) + k;
+   xm = x(n-k+1:end,:); %xm contains the last k variables
+   g = 100*(k + sum((xm - 0.5).^2 - cos(20*pi*(xm - 0.5)),1));
 
-xm = x(n-k+1:end,:); %xm contains the last k variables
-g = 100*(k + sum((xm - 0.5).^2 - cos(20*pi*(xm - 0.5)),1));
-
-% Compute the functions
-% The first and the last will be written separately to facilitate things
-fx(1,:) = 1/2*prod(x(1:M-1,:),1).*(1 + g);
-for ii = 2:M-1
-   fx(ii,:) = 1/2*prod(x(1:M-ii,:),1).*(1 - x(M-ii+1,:)).*(1 + g);
-end
-fx(M,:) = 1/2*(1 - x(1,:)).*(1 + g);
+   % Compute the functions
+   % The first and the last will be written separately to facilitate things
+   fx(1,:) = 1/2*prod(x(1:M-1,:),1).*(1 + g);
+   for ii = 2:M-1
+      fx(ii,:) = 1/2*prod(x(1:M-ii,:),1).*(1 - x(M-ii+1,:)).*(1 + g);
+   end
+   fx(M,:) = 1/2*(1 - x(1,:)).*(1 + g);

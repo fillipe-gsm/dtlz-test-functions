@@ -1,6 +1,5 @@
 %DTZL2 DTLZ2 multi-objective function
 %   This function represents a hyper-sphere.
-%   Using k = 10, the number of dimensions must be n = (M - 1) + k.
 %   The Pareto-optimal solutions are obtained when the last k variables of x
 %   are equal to 0.5.
 %

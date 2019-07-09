@@ -1,7 +1,5 @@
 %DTZL1 DTLZ1 multi-objective function
 %   This function represents a hyper-plane.
-%   Using k = 5, the number of dimensions must be n = (M - 1) + k, with M the
-%   number of objectives.
 %
 %   The Pareto front of this function happens at xm := x(n-k+1:end) = 0.5,
 %   that is, when the last k variables are all equal to 0.5. The first

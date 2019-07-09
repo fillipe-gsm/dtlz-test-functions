@@ -34,7 +34,7 @@ function fx = dtlz3(x, M)
    xm = x(n-k+1:end,:); %xm contains the last k variables
    g = 100*(k + sum((xm - 0.5).^2 - cos(20*pi*(xm - 0.5)),1));
 
-   % Computes the functions
+   % Compute the functions
    fx(1,:) = (1 + g).*prod(cos(pi/2*x(1:M-1,:)),1);
    for ii = 2:M-1
       fx(ii,:) = (1 + g) .* prod(cos(pi/2*x(1:M-ii,:)),1) .* ...

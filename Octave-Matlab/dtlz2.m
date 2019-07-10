@@ -11,15 +11,15 @@
 %      M: a scalar with the number of objectives
 %
 %   Output argument:
-%      fx: a (m x mu) matrix with mu points and their m objectives computed at
+%      fx: a (M x mu) matrix with mu points and their M objectives computed at
 %          the input
 %
 %   Example: Mapping the Pareto-optimal front
-%      For M = 2, x has dimension n = 11, wherein the last k = 10 variables 
-%      should be equal to 0.5 when x is in the Pareto-optimal set. In that case, 
-%      we can fix these last variables e vary the first one from 0 to 1 in order 
+%      For M = 2, x has dimension n = 11, wherein the last k = 10 variables
+%      should be equal to 0.5 when x is in the Pareto-optimal set. In that case,
+%      we can fix these last variables e vary the first one from 0 to 1 in order
 %      to map the front:
-%         
+%
 %         N = 100; %number of points
 %         x1 = linspace(0, 1, N);
 %         x2to11 = repmat(0.5, [10, N]);
@@ -32,8 +32,8 @@
 function fx = dtlz2(x, M)
    k = 10;
    dtlz_dimension_check(x, M, k);
-   
-   n = (M-1) + k;   
+
+   n = (M-1) + k;
    xm = x(n-k+1:end,:); %xm contains the last k variables
    g = sum((xm - 0.5).^2, 1);
 

@@ -1,10 +1,10 @@
 %NDSET Finds the nondominated set of a set of objective points
-%   
+%
 %   Syntax:
 %      ispar = ndset(F)
 %
 %   Input argument:
-%      F: a m x mu matrix with mu points and m objectives
+%      F: a M x mu matrix with mu points and M objectives
 %
 %   Output argument:
 %      ispar: a mu-length vector with true in the nondominated points
@@ -28,7 +28,7 @@ function ispar = ndset(F)
    auxf2 = and(aux1, aux2);
 
    % dom will be a 3D matrix (1 x mu x mu) such that, for the ii-th slice, it
-   % will contain +1 if fii dominates the current point, -1 if it is dominated 
+   % will contain +1 if fii dominates the current point, -1 if it is dominated
    % by it, and 0 if they are incomparable
    dom = zeros([1 mu mu]);
    dom(auxf1) = 1;

@@ -15,20 +15,20 @@
 %      M: a scalar with the number of objectives
 %
 %   Output argument:
-%      fx: a m x mu matrix with mu points and their m objectives computed at
+%      fx: a M x mu matrix with mu points and their M objectives computed at
 %          the input
 %
 %   Example: Mapping the Pareto-optimal front
 %      Since the Pareto front here is equal to the DTLZ2 function, the code is
 %      basically the same:
-%         
+%
 %         N = 100; %number of points
 %         x1 = linspace(0, 1, N);
 %         x2to11 = repmat(0.5, [10, N]);
 %         x = [x1; x2to11];
 %         fx = dtlz4(x, 2);
-%         plot(fx(1,:), fx(2,:), 'o'); 
-%      
+%         plot(fx(1,:), fx(2,:), 'o');
+%
 %      Notice how, in this case, points equally spaced in the variable space do
 %      not translate into equally spaced solutions in the objective one. This is
 %      a challenge to Evolutionary Algorithms.
@@ -36,8 +36,8 @@ function fx = dtlz4(x, M)
    k = 10;
    alpha = 100;
    dtlz_dimension_check(x, M, k);
-   
-   n = (M-1) + k;   
+
+   n = (M-1) + k;
    xm = x(n-k+1:end,:); %xm contains the last k variables
    g = sum((xm - 0.5).^2, 1);
 

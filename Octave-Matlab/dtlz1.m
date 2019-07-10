@@ -16,7 +16,7 @@
 %      M: a scalar with the number of objectives
 %
 %   Output argument:
-%      fx: a m x mu matrix with mu points and their m objectives computed at
+%      fx: a M x mu matrix with mu points and their M objectives computed at
 %         the input
 %
 %   Example 1: Evaluate DTLZ at random points

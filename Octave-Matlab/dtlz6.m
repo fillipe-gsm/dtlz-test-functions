@@ -1,7 +1,7 @@
 %DTZL6 DTLZ6 multi-objective function
 %   This function represents a curve, no matter the number of dimensions.
 %   It is a little bit harder than DTLZ5.
-%   
+%
 %   The Pareto optimal solutions are obtained when the last k variables of x
 %   are equal to 0.
 %
@@ -13,13 +13,13 @@
 %      M: a scalar with the number of objectives
 %
 %   Output argument:
-%      fx: a (m x mu) matrix with mu points and their m objectives computed at
+%      fx: a (M x mu) matrix with mu points and their M objectives computed at
 %          the input
 %
 %   Example: Mapping Pareto-optimal front with 3 objectives
-%      Since this function is similar to the DTLZ5, so will be this example, 
+%      Since this function is similar to the DTLZ5, so will be this example,
 %      with the exception that the last k = 10 variables will have the value 0.
-%      
+%
 %         N = 20; %the actual number of solutions will be N^2
 %         xrange = linspace(0, 1, N);
 %         x1to2 = zeros(2, 0);
@@ -30,17 +30,17 @@
 %         x = [x1to2; x5to12];
 %         fx = dtlz6(x, 3);
 %         plot3(fx(1,:), fx(2,:), fx(3,:), 'o');
-%      
+%
 %      Rotate this plot to check how it is actually a curve.
 function fx = dtlz6(x, M)
    k = 10;
    dtlz_dimension_check(x, M, k);
-   
+
    n = (M-1) + k;
    % There is a gr in the article. But, as used in the file from the authors,
-   % gr = g 
+   % gr = g
    xm = x(n-k+1:end,:); %xm contains the last k variables
-   g = sum(xm.^0.1,1); 
+   g = sum(xm.^0.1,1);
 
    theta(1,:) = pi/2*x(1,:);
    gr = g(ones(M-2,1),:); %replicates gr for the multiplication below

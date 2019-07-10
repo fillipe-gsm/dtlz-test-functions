@@ -20,7 +20,7 @@
 %      d: a mu-vector with the distance of each point to the optimal set
 function d = dtlz_distance(fname, xopt)
    % For each function, a different value of k and reference point is given   
-   switch fname   
+   switch lower(fname)
       case 'dtlz1' %k = 5 and x(last) = 0.5
          k = 5;
          value = 0.5;

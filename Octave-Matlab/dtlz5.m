@@ -1,11 +1,11 @@
 %DTZL5 DTLZ5 multi-objective function
-%   This function represents a curve, no matter the number of dimensions.   
+%   This function represents a curve, no matter the number of dimensions.
 %   The Pareto optimal solutions are obtained when the last k variables of x
 %   are equal to 0.5.
 %
 %   NOTE: After checking the paper and a few implementations (some apparently
 %   from the authors), there seems to be two mistakes in the text:
-%      1. There is a gr function in the text, but the same auxiliar g function 
+%      1. There is a gr function in the text, but the same auxiliar g function
 %         is used instead;
 %      2. There is no pi/2 multiplication inside the sine and cosine functions.
 %   The code adopted here reflects these notes.
@@ -18,7 +18,7 @@
 %      M: a scalar with the number of objectives
 %
 %   Output argument:
-%      fx: a (m x mu) matrix with mu points and their m objectives computed at
+%      fx: a (M x mu) matrix with mu points and their M objectives computed at
 %          the input
 %
 %   Example: Mapping Pareto-optimal front with 3 objectives
@@ -26,8 +26,8 @@
 %      interesting to plot its Pareto-optimal front with 3 objectives. For that,
 %      the first two variables will vary from 0 to 1, while the last k = 10 will
 %      be fixed to 0.5.
-%      
-%         N = 20; %the actual number of solutions will be N^2         
+%
+%         N = 20; %the actual number of solutions will be N^2
 %         xrange = linspace(0, 1, N);
 %         x1to2 = zeros(2, 0);
 %         for i = xrange
@@ -37,17 +37,17 @@
 %         x = [x1to2; x5to12];
 %         fx = dtlz5(x, 3);
 %         plot3(fx(1,:), fx(2,:), fx(3,:), 'o');
-%      
-%      Rotate this plot to check how it is actually a curve.      
+%
+%      Rotate this plot to check how it is actually a curve.
 function fx = dtlz5(x, M)
    k = 10;
    dtlz_dimension_check(x, M, k);
-   
-   n = (M-1) + k;   
+
+   n = (M-1) + k;
    % There is a gr in the article. But, as used in the file from the authors,
-   % gr = g 
+   % gr = g
    xm = x(n-k+1:end,:); %xm contains the last k variables
-   g = sum((xm - 0.5).^2, 1); 
+   g = sum((xm - 0.5).^2, 1);
 
    theta(1,:) = pi/2*x(1,:);
    gr = g(ones(M-2,1),:); %replicates gr for the multiplication below

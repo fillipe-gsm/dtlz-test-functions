@@ -10,7 +10,7 @@ Currently this repository implements:
 
 - DTLZ functions from DTLZ1 to DTLZ7 with any number of objectives M &ge; 2;
 - A code to measure the distance from a given solution x to the Pareto-optimal
-set of a DTLZ function (this approach is better explained in [2], chapter 2);
+set of a DTLZ function (this approach is better explained in [2], chapter 6);
 - A code to compute the ideal and Nadir solutions of these functions (if the
 Nadir computation of the DTLZ7 seems too arbitrary, check the small documentation
 in the `docs` folder explaining its derivation).

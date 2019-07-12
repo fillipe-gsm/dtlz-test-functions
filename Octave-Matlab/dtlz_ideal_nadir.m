@@ -12,7 +12,8 @@
 %		 zstar = [0 0 0 ... 0]
 %		 znad = (1/sqrt(2)) ^ [M-2, M-2, M-3, ..., 3, 2, 1, 0]
 %
-%	 DTLZ7: This is the trickiest:
+%	 DTLZ7: This is the trickiest, so if in doubt, check the pdf inside the
+%   "docs" folder :
 %	 The ideal is composed of M-1 zeros, and the last component is equal to 
 %		 faux = 2*(M - (M-1)*xaux/2*(1 + sin(3*pi*xaux))), 
 %		 	 wherein xaux = 0.85940, obtained numerically by me
